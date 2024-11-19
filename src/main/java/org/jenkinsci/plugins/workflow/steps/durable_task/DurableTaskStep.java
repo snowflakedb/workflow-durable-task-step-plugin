@@ -91,6 +91,7 @@ import org.kohsuke.accmod.restrictions.NoExternalUse;
 import org.kohsuke.stapler.DataBoundSetter;
 import org.kohsuke.stapler.QueryParameter;
 
+import io.jenkins.plugins.MaskFactory;
 /**
  * Runs a durable task, such as a shell script, typically on an agent.
  * <p>“Durable” in this context means that Jenkins makes an attempt to keep the external process running
@@ -599,7 +600,8 @@ public abstract class DurableTaskStep extends Step implements EnvVarsFilterableB
                         awaitingAsynchExit = true;
                     }
                 } else { // legacy mode
-                        if (controller.writeLog(workspace, listener.getLogger())) {
+                        OutputStream out = MaskFactory.getMaskedStream(listener().getLogger());
+                        if (controller.writeLog(workspace, out)) {
                             getContext().saveState();
                             recurrencePeriod = MIN_RECURRENCE_PERIOD; // got output, maybe we will get more soon
                         } else {
