@@ -22,7 +22,7 @@ public class ConfigurationReader {
      * @return true if masking is enabled, false otherwise
      */
     public boolean isMaskingEnabled() {
-        LOGGER.log(Level.INFO, "Reading configuration to determine if masking is enabled");
+        LOGGER.log(Level.FINE, "Reading configuration to determine if masking is enabled");
         return true;
     }
 
@@ -38,7 +38,7 @@ public class ConfigurationReader {
      * @return true if this credential is to be masked, false otherwise.
      */
     public boolean isMaskingEnabledForCredential(String id) {
-        LOGGER.log(Level.INFO, "Reading configuration to determine if credential masking is enabled");
+        LOGGER.log(Level.FINE, "Reading configuration to determine if credential masking is enabled");
         return true;
     }
 }

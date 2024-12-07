@@ -36,14 +36,14 @@ public class MaskFactory {
      */
     public static OutputStream getMaskedStream(OutputStream delegate, ConfigurationReader configurationReader) {
         boolean enableCredentialsMasking = configurationReader.isMaskingEnabled();
-        LOGGER.log(Level.INFO, "Creating MaskingOutputStream " + enableCredentialsMasking);
+        LOGGER.log(Level.FINE, "Creating MaskingOutputStream " + enableCredentialsMasking);
         if (enableCredentialsMasking == true) {
-            LOGGER.log(Level.INFO, "Credential masking enabled, creating MaskingOutputStream");
+            LOGGER.log(Level.FINE, "Credential masking enabled, creating MaskingOutputStream");
             List<String> valuesToMask = searchForValuesToMask(configurationReader);
             return new MaskingOutputStream(delegate, valuesToMask);
         }
         else {
-            LOGGER.log(Level.INFO, "Credential masking disabled, returning original OutputStream");
+            LOGGER.log(Level.FINE, "Credential masking disabled, returning original OutputStream");
             return delegate;
         }
     }
@@ -58,12 +58,12 @@ public class MaskFactory {
      * @return a list of plain text strings to mask
      */
     public static List<String> searchForValuesToMask(ConfigurationReader configurationReader) {
-        LOGGER.log(Level.INFO, "Scanning credential store for values to mask");
+        LOGGER.log(Level.FINE, "Scanning credential store for values to mask");
         List<String> valuesToMask = new ArrayList<String>();
         try {
             Jenkins instance = Jenkins.getInstance();
             if (instance == null) {
-                LOGGER.log(Level.INFO, "Jenkins instance is null, cannot retrieve credentials");
+                LOGGER.log(Level.FINE, "Jenkins instance is null, cannot retrieve credentials");
                 return valuesToMask;
             }
 
@@ -72,11 +72,11 @@ public class MaskFactory {
             List<Credentials> list = cp.getCredentials();
 
             for (Credentials cred : list) {
-                LOGGER.log(Level.INFO, "Found credential: " + cred.getDescriptor().getId()
+                LOGGER.log(Level.FINE, "Found credential: " + cred.getDescriptor().getId()
                         + " with class: " + cred.getClass().getName());
                 boolean maskCredential = configurationReader.isMaskingEnabledForCredential(cred.getDescriptor().getId());
                 if (maskCredential != true) {
-                    LOGGER.log(Level.INFO, "Credential " + cred.getDescriptor().getId() 
+                    LOGGER.log(Level.FINE, "Credential " + cred.getDescriptor().getId() 
                                             + " skipped as it is not on allow list");
                     continue;
                 }
@@ -90,7 +90,7 @@ public class MaskFactory {
         } catch (Exception e) {
             LOGGER.log(Level.INFO, "Exception while retrieving credentials from credential store", e);
         }
-        LOGGER.log(Level.INFO,
+        LOGGER.log(Level.FINE,
                 "Finished scanning credential store for values to mask, added total of " + valuesToMask.size() + " masks");
         return valuesToMask;
     }
