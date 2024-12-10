@@ -1,4 +1,4 @@
-package io.jenkins.plugins;
+package com.snowflake.jenkins.workflow_durable_task_step;
 
 import java.io.OutputStream;
 import java.util.List;

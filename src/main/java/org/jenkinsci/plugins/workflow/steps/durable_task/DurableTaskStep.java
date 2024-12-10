@@ -91,7 +91,7 @@ import org.kohsuke.accmod.restrictions.NoExternalUse;
 import org.kohsuke.stapler.DataBoundSetter;
 import org.kohsuke.stapler.QueryParameter;
 
-import io.jenkins.plugins.MaskFactory;
+import com.snowflake.jenkins.workflow_durable_task_step.MaskFactory;
 /**
  * Runs a durable task, such as a shell script, typically on an agent.
  * <p>“Durable” in this context means that Jenkins makes an attempt to keep the external process running

@@ -1,4 +1,4 @@
-package io.jenkins.plugins;
+package com.snowflake.jenkins.workflow_durable_task_step;
 
 import static org.easymock.EasyMock.*;
 
@@ -6,9 +6,6 @@ import java.io.OutputStream;
 
 import org.easymock.*;
 import org.junit.*;
-
-import io.jenkins.plugins.ConfigurationReader;
-import io.jenkins.plugins.MaskingOutputStream;
 
 
 public class MaskFactoryTest {

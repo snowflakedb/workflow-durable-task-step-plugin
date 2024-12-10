@@ -1,8 +1,7 @@
-package io.jenkins.plugins;
+package com.snowflake.jenkins.workflow_durable_task_step;
 
 import org.junit.*;
 import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 import org.junit.runner.RunWith;
 
 
