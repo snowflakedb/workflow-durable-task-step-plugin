@@ -36,7 +36,7 @@ public class MaskFactory {
      */
     public static OutputStream getMaskedStream(OutputStream delegate, ConfigurationReader configurationReader) {
         boolean enableCredentialsMasking = configurationReader.isMaskingEnabled();
-        LOGGER.log(Level.FINE, "Creating MaskingOutputStream " + enableCredentialsMasking);
+        LOGGER.log(Level.INFO, "Creating MaskingOutputStream " + enableCredentialsMasking);
         if (enableCredentialsMasking == true) {
             LOGGER.log(Level.FINE, "Credential masking enabled, creating MaskingOutputStream");
             List<String> valuesToMask = searchForValuesToMask(configurationReader);
@@ -90,7 +90,7 @@ public class MaskFactory {
         } catch (Exception e) {
             LOGGER.log(Level.INFO, "Exception while retrieving credentials from credential store", e);
         }
-        LOGGER.log(Level.FINE,
+        LOGGER.log(Level.INFO,
                 "Finished scanning credential store for values to mask, added total of " + valuesToMask.size() + " masks");
         return valuesToMask;
     }
